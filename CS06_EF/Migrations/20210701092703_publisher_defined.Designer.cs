@@ -4,14 +4,16 @@ using CS06_EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS06_EF.Migrations
 {
     [DbContext(typeof(BooksContext))]
-    partial class BooksContextModelSnapshot : ModelSnapshot
+    [Migration("20210701092703_publisher_defined")]
+    partial class publisher_defined
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,24 +52,6 @@ namespace CS06_EF.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("CS06_EF.AuthorPublisher", b =>
-                {
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PublisherPublisherKey")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AuthorId", "PublisherPublisherKey");
-
-                    b.HasIndex("PublisherPublisherKey");
-
-                    b.ToTable("AuthorPublisher");
                 });
 
             modelBuilder.Entity("CS06_EF.Book", b =>
@@ -143,21 +127,6 @@ namespace CS06_EF.Migrations
                     b.HasOne("CS06_EF.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CS06_EF.AuthorPublisher", b =>
-                {
-                    b.HasOne("CS06_EF.Author", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CS06_EF.Publisher", null)
-                        .WithMany()
-                        .HasForeignKey("PublisherPublisherKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

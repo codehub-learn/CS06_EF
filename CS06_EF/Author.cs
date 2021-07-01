@@ -11,6 +11,7 @@ namespace CS06_EF
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public List<Book> AuthoredBooks { get; set; }
+        public List<Book> AuthoredBooks { get; set; } = new();
+        public List<Publisher> Publishers { get; set; } = new();
     }
 }

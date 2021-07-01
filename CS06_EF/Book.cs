@@ -14,6 +14,7 @@ namespace CS06_EF
         public int? Pages { get; set; }
         public int? AuthorId { get; set; }
         public Author BookAuthor { get; set; }
+        public List<Genre> Genres { get; set; } = new();
         
         public Book(string title, DateTime pubDate, int pages)
         {

@@ -4,14 +4,16 @@ using CS06_EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS06_EF.Migrations
 {
     [DbContext(typeof(BooksContext))]
-    partial class BooksContextModelSnapshot : ModelSnapshot
+    [Migration("20210701102111_payload")]
+    partial class payload
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,15 +59,18 @@ namespace CS06_EF.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PublisherPublisherKey")
+                    b.Property<int>("PublishersPublisherKey")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("StartDate")
+                    b.Property<int>("PublisherKey")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("AuthorId", "PublisherPublisherKey");
+                    b.HasKey("AuthorId", "PublishersPublisherKey");
 
-                    b.HasIndex("PublisherPublisherKey");
+                    b.HasIndex("PublishersPublisherKey");
 
                     b.ToTable("AuthorPublisher");
                 });
@@ -157,7 +162,7 @@ namespace CS06_EF.Migrations
 
                     b.HasOne("CS06_EF.Publisher", null)
                         .WithMany()
-                        .HasForeignKey("PublisherPublisherKey")
+                        .HasForeignKey("PublishersPublisherKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
