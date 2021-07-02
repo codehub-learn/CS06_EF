@@ -9,6 +9,7 @@ namespace CS06_EF
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Synopsis> Synopses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
@@ -28,7 +29,7 @@ namespace CS06_EF
                     ap => ap.HasOne<Author>().WithMany()
                 )
                 .Property(ap => ap.StartDate)
-                .HasDefaultValue("getdate()");
+                .HasDefaultValue(DateTime.UtcNow);
 
         }
     }

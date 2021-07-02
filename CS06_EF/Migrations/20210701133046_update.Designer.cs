@@ -4,14 +4,16 @@ using CS06_EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS06_EF.Migrations
 {
     [DbContext(typeof(BooksContext))]
-    partial class BooksContextModelSnapshot : ModelSnapshot
+    [Migration("20210701133046_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +65,7 @@ namespace CS06_EF.Migrations
                     b.Property<DateTime?>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 7, 2, 12, 42, 29, 964, DateTimeKind.Utc).AddTicks(3413));
+                        .HasDefaultValue(new DateTime(2021, 7, 1, 13, 30, 46, 524, DateTimeKind.Utc).AddTicks(8433));
 
                     b.HasKey("AuthorId", "PublisherPublisherKey");
 
@@ -85,7 +87,7 @@ namespace CS06_EF.Migrations
                     b.Property<int?>("Pages")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PubDate")
+                    b.Property<DateTime?>("PubDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -134,30 +136,6 @@ namespace CS06_EF.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("CS06_EF.Synopsis", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WriterFirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WriterLastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId")
-                        .IsUnique();
-
-                    b.ToTable("Synopses");
-                });
-
             modelBuilder.Entity("BookGenre", b =>
                 {
                     b.HasOne("CS06_EF.Book", null)
@@ -197,23 +175,9 @@ namespace CS06_EF.Migrations
                     b.Navigation("BookAuthor");
                 });
 
-            modelBuilder.Entity("CS06_EF.Synopsis", b =>
-                {
-                    b.HasOne("CS06_EF.Book", null)
-                        .WithOne("Synopsis")
-                        .HasForeignKey("CS06_EF.Synopsis", "BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CS06_EF.Author", b =>
                 {
                     b.Navigation("AuthoredBooks");
-                });
-
-            modelBuilder.Entity("CS06_EF.Book", b =>
-                {
-                    b.Navigation("Synopsis");
                 });
 #pragma warning restore 612, 618
         }
