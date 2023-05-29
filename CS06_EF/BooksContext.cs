@@ -10,11 +10,11 @@ namespace CS06_EF
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Synopsis> Synopses { get; set; }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
             optionsBuilder.UseSqlServer
-                ("Data Source = localhost; Initial Catalog = CS06_Data; User ID = User; Password = pass");
+                ("Data Source = localhost; Initial Catalog = CS06_Data; Integrated Security = true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
